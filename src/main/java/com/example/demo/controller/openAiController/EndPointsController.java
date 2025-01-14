@@ -17,7 +17,7 @@ public class EndPointsController {
 	private ModelsService modelsService;
 	
 	@GetMapping("/retriveModel")
-	public ResponseEntity<Model> RetriveModel(){
-		return new ResponseEntity<>(modelsService.RetrieveModel("gpt-3.5-turbo-16k"), HttpStatus.OK);
+	public ResponseEntity<Model> RetriveModel() {
+		return new ResponseEntity<>(modelsService.RetrieveModel("gpt-4o-mini"), HttpStatus.OK);
 	}
 }
