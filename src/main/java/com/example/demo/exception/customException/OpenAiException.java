@@ -2,13 +2,14 @@ package com.example.demo.exception.customException;
 
 import org.springframework.http.HttpStatus;
 
-public class OpenAiDefaultException extends RuntimeException {
+public class OpenAiException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
+	private Object errorObject;
 	private HttpStatus status;
 	
-	public OpenAiDefaultException(String msg, HttpStatus status) {
-		super(msg);
+	public OpenAiException(Object errorObject, HttpStatus status) {
+		this.errorObject = errorObject;
 		this.status = status;
 	}
 
@@ -17,5 +18,11 @@ public class OpenAiDefaultException extends RuntimeException {
 	}
 	public void setStatus(HttpStatus status) {
 		this.status = status;
+	}
+	public Object getErrorObject() {
+		return errorObject;
+	}
+	public void setErrorObject(Object errorObject) {
+		this.errorObject = errorObject;
 	}
 }

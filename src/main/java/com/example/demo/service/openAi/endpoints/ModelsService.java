@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.openAi.administration.Error;
 import com.example.demo.dto.openAi.administration.Model;
-import com.example.demo.exception.customException.OpenAiDefaultException;
-import com.example.demo.exception.customException.OpenAiErrorException;
+import com.example.demo.exception.customException.OpenAiException;
 import com.google.gson.Gson;
 
 import okhttp3.OkHttpClient;
@@ -26,39 +25,26 @@ public class ModelsService {
 	@Autowired
 	private Gson GSON;
 	
-	/*public Request ListModels() {
-		Request request = new Request.Builder()
-                .url("https://api.openai.com/v1/models")
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer " + KEY)
-                .delete()
-                .build();
-		
-		GSON.fromJson(CLIENT.newCall(request).execute(), List<Models>);
-		
-		return ;
-	}*/
-	
 	public Model RetrieveModel(String model) {
 		try {
 			Request request = new Request.Builder()
 	                .url("https://api.openai.com/v1/models/" + model)
 	                .addHeader("Content-Type", "application/json")
 	                .addHeader("Authorization", "Bearer " + KEY)
-	                .delete()
+	                .get()
 	                .build();
 			
 			Response response = CLIENT.newCall(request).execute();
 			
-			if(response.code() == 404) {
-				throw new OpenAiErrorException(GSON.fromJson(response.body().string(), Error.class), HttpStatus.NOT_FOUND);
-			} else {
-				return GSON.fromJson(response.body().string(), Model.class);
+			switch (response.code()) {
+				case 404 -> throw new OpenAiException(GSON.fromJson(response.body().string(), Error.class), HttpStatus.NOT_FOUND);
 			}
-		} catch (OpenAiErrorException e) {
+			
+			return GSON.fromJson(response.body().string(), Model.class);
+		} catch (OpenAiException e) {
 			throw e;
-		} catch (Exception e) {
-			throw new OpenAiDefaultException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {			
+			throw new OpenAiException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
