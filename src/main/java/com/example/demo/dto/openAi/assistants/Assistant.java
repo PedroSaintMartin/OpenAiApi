@@ -13,7 +13,7 @@ public class Assistant {
 	private String description;
 	private String model;
 	private String instructions;
-	private ToolsFragment tools;
+	private ToolsFragment<?>[] tools;
 	private Map<String, String> metadata;
 	private Double temperature;
 	private Double top_p;
@@ -60,10 +60,10 @@ public class Assistant {
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
-	public ToolsFragment getTools() {
+	public ToolsFragment<?>[] getTools() {
 		return tools;
 	}
-	public void setTools(ToolsFragment tools) {
+	public void setTools(ToolsFragment<?>[] tools) {
 		this.tools = tools;
 	}
 	public Map<String, String> getMetadata() {

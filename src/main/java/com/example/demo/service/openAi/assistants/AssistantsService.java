@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.openAi.CreateAssistant;
 import com.example.demo.dto.openAi.assistants.Assistant;
+import com.example.demo.dto.openAi.assistants.request.CreateAssistant;
 import com.example.demo.exception.customException.OpenAiException;
 import com.google.gson.Gson;
 

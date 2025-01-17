@@ -2,31 +2,18 @@ package com.example.demo.dto.openAi.fragment;
 
 import java.util.Objects;
 
-public class ToolsFragment {
-	private CodeInterpreterToolFragment codeInterpreterTool;
-	private FileSearchToolFragment fileSearchTool;
-	private FunctionToolFrament functionTool;
-	public CodeInterpreterToolFragment getCodeInterpreterTool() {
-		return codeInterpreterTool;
+public class ToolsFragment<T> {
+	private T type;
+
+	public T getType() {
+		return type;
 	}
-	public void setCodeInterpreterTool(CodeInterpreterToolFragment codeInterpreterTool) {
-		this.codeInterpreterTool = codeInterpreterTool;
-	}
-	public FileSearchToolFragment getFileSearchTool() {
-		return fileSearchTool;
-	}
-	public void setFileSearchTool(FileSearchToolFragment fileSearchTool) {
-		this.fileSearchTool = fileSearchTool;
-	}
-	public FunctionToolFrament getFunctionTool() {
-		return functionTool;
-	}
-	public void setFunctionTool(FunctionToolFrament functionTool) {
-		this.functionTool = functionTool;
+	public void setType(T type) {
+		this.type = type;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(codeInterpreterTool, fileSearchTool, functionTool);
+		return Objects.hash(type);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -36,14 +23,12 @@ public class ToolsFragment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ToolsFragment other = (ToolsFragment) obj;
-		return Objects.equals(codeInterpreterTool, other.codeInterpreterTool)
-				&& Objects.equals(fileSearchTool, other.fileSearchTool)
-				&& Objects.equals(functionTool, other.functionTool);
+		ToolsFragment<?> other = (ToolsFragment<?>) obj;
+		return Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
-		return "ToolsFragment [codeInterpreterTool=" + codeInterpreterTool + ", fileSearchTool=" + fileSearchTool
-				+ ", functionTool=" + functionTool + "]";
+		return "ToolsFragment [type=" + type + "]";
 	}
+	
 }
