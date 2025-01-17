@@ -9,6 +9,7 @@ public class OpenAiException extends RuntimeException {
 	private HttpStatus status;
 	
 	public OpenAiException(Object errorObject, HttpStatus status) {
+		super();
 		this.errorObject = errorObject;
 		this.status = status;
 	}
