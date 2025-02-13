@@ -32,6 +32,7 @@ public class ThreadsService {
 		}
 	}
 	
+	/*
 	public Thread retrieveThread(String threadId) {
 		try {
 			Request request = new Request.Builder()
@@ -49,15 +50,7 @@ public class ThreadsService {
 			e.printStackTrace();
 			throw new OpenAiException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
-	
-	public Thread modifyThread() {
-		try {
-			return null;
-		} catch (Exception e) {
-			throw new OpenAiException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	}*/
 	
 	public Thread deleteThread(String threadId) {
 		try {
@@ -74,9 +67,9 @@ public class ThreadsService {
 			switch (response.code()) {
 				case 400 -> 
 					throw new OpenAiException("'threadId' invalid: " + threadId, HttpStatus.BAD_REQUEST);
+				default ->
+					{ return GSON.fromJson(response.body().string(), Thread.class); }
 			}
-			
-			return GSON.fromJson(response.body().string(), Thread.class);
 		} catch (OpenAiException e) {
 			throw e;
 		} catch (Exception e) {

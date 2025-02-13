@@ -38,9 +38,9 @@ public class ModelsService {
 			
 			switch (response.code()) {
 				case 404 -> throw new OpenAiException(GSON.fromJson(response.body().string(), Error.class), HttpStatus.NOT_FOUND);
+				default -> 
+					{ return GSON.fromJson(response.body().string(), Model.class); }
 			}
-			
-			return GSON.fromJson(response.body().string(), Model.class);
 		} catch (OpenAiException e) {
 			throw e;
 		} catch (Exception e) {			
